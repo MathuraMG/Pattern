@@ -49,7 +49,7 @@ function fractalArtOld() {
   }
   if (xPoint < cWidth && yPoint < cHeight && xPoint > 0 && yPoint > 0) {
     if (selectPattern == 'fractals') {
-      background(overallBG);
+      //background(overallBG);
       cWidth = fWidth / 1; // xsplit.value();
       cHeight = fHeight / 1; // ysplit.value();
       push();
@@ -58,6 +58,7 @@ function fractalArtOld() {
       var circleSize = (canvasWidth / 20 - distFromCenter / 10) / 3;
       circleHue = map(distFromCenter, 0, sqrt((canvasWidth * canvasWidth + canvasHeight * canvasHeight) / 4), hueStart, hueStart + 50);
       pgOne = createGraphics(cWidth, cHeight);
+      image(pgOne, 0, 0, cWidth, cHeight);
       cS = map(distFromCenter, 0, 350, 10, 70);
       f = new fractalCircle(xPoint, yPoint, circleSize, circleHue, pgOne);
       //print(xPoint+','+yPoint);
@@ -65,20 +66,21 @@ function fractalArtOld() {
       pg.push(pgOne);
       fractals.push(f);
       pop();
-      for (var i = 0; i < pg.length; i++) {
-        //for (var a = 0; a < xsplit.value(); a++) {
-        //for (var b = 0; b < ysplit.value(); b++) {
-        image(pg[i], 0, 0, cWidth, cHeight);
-        //}
-        //}
-      }
+      // for (var i = 0; i < pg.length; i++) {
+      //   //for (var a = 0; a < xsplit.value(); a++) {
+      //   //for (var b = 0; b < ysplit.value(); b++) {
+      //   image(pg[i], 0, 0, cWidth, cHeight);
+      //   //}
+      //   //}
+      // }
+      
     }
     imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
   }
 }
 
 function fractalArt(xPoint, yPoint) {
-  background(overallBG);
+  //background(overallBG);
   cWidth = fWidth / 1; //xsplit.value();
   cHeight = fHeight / 1; //ysplit.value();
   push();
@@ -96,15 +98,16 @@ function fractalArt(xPoint, yPoint) {
   //}
   //print(xPoint+','+yPoint);
   pg.push(pgOne);
+  image(pgOne, 0, 0, cWidth, cHeight);
   pop();
-  for (var i = 0; i < pg.length; i++) {
-    //for (var a = 0; a < xsplit.value(); a++) {
-    //for (var b = 0; b < ysplit.value(); b++) {
-    image(pg[i], 0, 0, cWidth, cHeight);
-    //}
-    //}
-    imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-  }
+  // for (var i = 0; i < pg.length; i++) {
+  //   //for (var a = 0; a < xsplit.value(); a++) {
+  //   //for (var b = 0; b < ysplit.value(); b++) {
+  //   image(pg[i], 0, 0, cWidth, cHeight);
+  //   //}
+  //   //}
+  //   //imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+  // }
 }
 
 

@@ -266,7 +266,7 @@ function setupP() {
 
 function textInstructions() {
   if (selectPattern == 'circles') {
-    inst = ' Press space to pause the drawing and move your mouse about the canvas to change size and colour';
+    inst = ' Drag on the canvas to create trees in the direction you want!';
   } else if (selectPattern == 'fractals') {
     inst = ' Click on the canvas to get a fractal burst';
   } else if (selectPattern == 'lines') {
@@ -343,6 +343,6 @@ function drawPaletteMarker(centerX, centerY, hueStart) {
   
   pMarkerImg.position(centerX-5+40*sin(-hueStart-180),centerY-5+40*cos(hueStart+180));
   pMarkerImg.size(10,10);
-  pMarkerImg.style('z-index','-1');
+  pMarkerImg.style('z-index',-0.9);
   pop();
 }

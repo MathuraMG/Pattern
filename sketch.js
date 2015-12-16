@@ -100,7 +100,7 @@ function draw() {
     drawSq(startX, startY, sideVal, hueStart);
 
   } else if (selectPattern == 'lines' && brTrue == true) {
-    background(overallBG);
+    //background(overallBG);
     //blendMode(LIGHTEST);
     lineArt(selectX, selectY, hueStart);
 
@@ -182,21 +182,7 @@ function mousePressed() {
 }
 
 function keyPressed() {
-  if (keyCode == LEFT_ARROW) {
-    //print('yo');
-    background(overallBG);
-    pg.pop();
-    fractals.pop();
-    for (var i = 0; i < pg.length; i++) {
 
-      //for (var a = 0; a < xsplit.value(); a++) {
-      //for (var b = 0; b < ysplit.value(); b++) {
-      image(pg[i], a * cWidth, b * cHeight, cWidth, cHeight);
-      //}
-      //}
-
-    }
-  }
   if (keyCode == 32) {
     pauseFn();
   }
