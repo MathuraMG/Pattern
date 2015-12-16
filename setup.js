@@ -27,8 +27,8 @@ function drawHomePage() {
   homePageBack.size(windowWidth, windowHeight);
   homePageBack.style('background-color', 'black', 'z-index', 5);
   homePageBack.id('homePageBack');
-  
-  
+
+
 
   var button1 = createButton('');
   button1.class('selectBtn');
@@ -66,7 +66,7 @@ function drawHomePage() {
   var image3 = createImg('assets/brBtn1.png');
   image3.class('imgFrBtn');
   image3.size(imgSize, imgSize);
-  
+
   var homePageText1 = createDiv('Fractals');
   homePageText1.style('color', 'white');
   homePageText1.style('text-align', 'center');
@@ -74,7 +74,7 @@ function drawHomePage() {
   homePageText1.style('font-family', 'Raleway');
   homePageText1.style('font-weight', '200');
   homePageText1.style('font-size', '24px');
-  
+
   var homePageText2 = createDiv('Pythogran');
   homePageText2.style('color', 'white');
   homePageText2.style('text-align', 'center');
@@ -82,7 +82,7 @@ function drawHomePage() {
   homePageText2.style('font-family', 'Raleway');
   homePageText2.style('font-weight', '200');
   homePageText2.style('font-size', '24px');
-  
+
   var homePageText3 = createDiv('Brownian');
   homePageText3.style('color', 'white');
   homePageText3.style('text-align', 'center');
@@ -101,10 +101,10 @@ function drawHomePage() {
   homePageText1.parent(homePageBack);
   homePageText2.parent(homePageBack);
   homePageText3.parent(homePageBack);
-  
-  var exampleLink = createA('assets/examples.jpg','Examples');
-  exampleLink.style('z-index',5);
-  exampleLink.size(10,10);
+
+  var exampleLink = createA('assets/examples.jpg', 'Examples');
+  exampleLink.style('z-index', 5);
+  exampleLink.size(10, 10);
   exampleLink.style('font-family', 'Raleway');
   exampleLink.style('font-weight', '200');
   exampleLink.style('font-size', '18px');
@@ -306,33 +306,43 @@ function canvasGraphics() {
 }
 
 function drawPalette(centerX, centerY) {
-  push();
-  //print('drawing palette');
-  //background(0);
+  // push();
+  // //print('drawing palette');
+  // //background(0);
+  //   angleMode(DEGREES);
+  // colorMode(HSB);
+  // translate(centerX, centerY);
+  // strokeWeight(1);
+  // for (var i = 0; i < 360; i++) {
+  //   rotate(1);
+  //   stroke(i, 70, 70);
+  //   line(0, 0, 0, -50);
+  // }
+  // pop();
+  // fill(0);
+  // ellipse(centerX, centerY, 40, 40);
+  
+  var img = createImg('assets/pallette1.png');
+  img.position(centerX-70, centerY-60);
+  img.style('z-index', -1);
 
-  angleMode(DEGREES);
-  colorMode(HSB);
-  translate(centerX, centerY);
-  strokeWeight(1);
-  for (var i = 0; i < 360; i++) {
-    rotate(1);
-    stroke(i, 70, 70);
-    line(0, 0, 0, -50);
-  }
-  pop();
-  fill(0);
-  ellipse(centerX, centerY, 40, 40);
 }
 
 function drawPaletteMarker(centerX, centerY, hueStart) {
+  // push();
+  // angleMode(DEGREES);
+  // colorMode(RGB);
+  // translate(centerX, centerY);
+  // rotate(hueStart + 180);
+  // noStroke();
+  // fill(255);
+  // ellipse(0, 35, 10, 10);
+  // pop();
   push();
   angleMode(DEGREES);
-  colorMode(RGB);
-  translate(centerX, centerY);
-  rotate(hueStart+180);
-  noStroke();
-  fill(255);
-  ellipse(0, 35, 10, 10);
+  
+  pMarkerImg.position(centerX-5+40*sin(-hueStart-180),centerY-5+40*cos(hueStart+180));
+  pMarkerImg.size(10,10);
+  pMarkerImg.style('z-index','-1');
   pop();
-
 }

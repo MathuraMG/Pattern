@@ -85,15 +85,15 @@ function fractalArt(xPoint, yPoint) {
   colorMode(HSB);
   var distFromCenter = dist(xPoint, yPoint, canvasWidth / 2, canvasHeight / 2);
   var circleSize = (canvasWidth / 17 - distFromCenter / 6) / 3;
-  circleHue = hueStart; //map(distFromCenter, 0, sqrt((canvasWidth * canvasWidth + canvasHeight * canvasHeight) / 4), hueStart, hueStart + 50);
+  circleHue = map(distFromCenter, 0, sqrt((canvasWidth * canvasWidth + canvasHeight * canvasHeight) / 4), hueStart, hueStart + 50);
   pgOne = createGraphics(cWidth, cHeight);
   cS = map(distFromCenter, 0, 350, 10, 70);
-  var rand = random(3, 5);
-  for (var i = 0; i < rand; i++) {
-    f = new fractalCircle(xPoint + i * random(-20, 20), yPoint + i * random(-20, 20), circleSize * (rand - i) * random(-0.7, -0.2), circleHue + random(0, 30), pgOne);
-    f.drawFractal();
-    fractals.push(f);
-  }
+  //var rand = random(3, 5);
+  //for (var i = 0; i < rand; i++) {
+  f = new fractalCircle(xPoint, yPoint, circleSize, circleHue, pgOne);
+  f.drawFractal();
+  fractals.push(f);
+  //}
   //print(xPoint+','+yPoint);
   pg.push(pgOne);
   pop();
@@ -300,31 +300,28 @@ function drawSq(startX, startY, sideVal, hueColour) {
 
   angleMode(DEGREES);
   //function treeFr(x, y, ratio, angle,type,flag)
-  fill(hueColour,100,100);
+  fill(hueColour, 100, 100);
   noStroke();
   particle[0] = new treeFr(startX, startY, sideVal, 1, 0, 0, 0, direction);
   a = particle[0].display();
   push();
 
-
-
   translate(startX, startY);
-  //rotate(totAngle);
-
-
-  rect(0, -sideVal, sideVal, sideVal);
+  if (j_count == 0) {
+    rect(0, -sideVal, sideVal, sideVal);
+  }
   pop();
 
   //for (var j = 1; j < 5; j++) {
   //var j = frameCount - frame;
-  if (frameCount % 1 == 0) {
+  if (frameCount % 3 == 0 && j_count < 12) {
     j_count++;
     var j = j_count;
     //print(frame + ',' + frameCount);
     l = particle.length;
     count = 0;
 
-    fill(hueColour - 5 * j, 100,100);
+    fill(hueColour - 5 * j, 100, 100);
     noStroke();
 
     for (var i = 0; i < l; i++) {

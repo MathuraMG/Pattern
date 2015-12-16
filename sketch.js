@@ -8,7 +8,8 @@ var flag = 0;
 var inst = 'potato';
 var instDiv;
 var overallBG = 0;
-
+var palletteImage;
+var pMarkerImg;
 
 var selectPattern = "";
 
@@ -71,6 +72,8 @@ var paletteX, paletteY;
 
 function preload() {
   notes = [loadSound('assets/bass.mp3'), loadSound('assets/drums.mp3'), loadSound('assets/piano.mp3')];
+  palletteImage = loadImage('assets/pallette1.png');
+
 }
 
 function setup() {
@@ -86,7 +89,8 @@ function setup() {
   drawHomePage();
   paletteX = 100;
   paletteY = windowHeight - 75;
-
+  drawPalette(paletteX, paletteY);
+  pMarkerImg = createImg('assets/pMarker.png');
 }
 
 function draw() {
@@ -102,14 +106,20 @@ function draw() {
 
   }
   //blendMode(BLEND );
-  drawPalette(paletteX, paletteY);
+
   drawPaletteMarker(paletteX, paletteY, hueStart);
   textInstructions();
 
 }
 
 function mouseDragged() {
+  if (selectPattern == 'fractals') {
+    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+      setSelect();
+      fractalArt(selectX, selectY);
 
+    }
+  }
 }
 
 function mouseReleased() {
@@ -129,28 +139,28 @@ function mouseReleased() {
       brTrue = true;
     }
 
-  } else if (selectPattern == 'fractals') {
-    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
-      setSelect();
-      fractalArt(selectX, selectY);
-
-    }
   } else if (selectPattern == 'circles') {
+    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+      endX = mouseX;
+      endY = mouseY;
+      sideVal = dist(beginX, beginY, endX, endY);
+      var dir1 = atan((endY - beginY) / (endX - beginX));
+      if (true){//endY >= beginY) {
+        if (dir1 > 0 && dir1 < 90) {
+          direction = map(dir1, 0, 90, 10, 45);
+        } else if (dir1 < 0) {
+          direction = map(dir1, -90, 0, 45, 80);
+        }
+        print(dir1 + ',' + direction);
+        startX = beginX;
+        startY = beginY;
+        setSelect();
 
-    endX = mouseX;
-    endY = mouseY;
-    sideVal = dist(beginX, beginY, endX, endY);
-    var dir1 = atan((endY - beginY) / (endX - beginX));
-
-
-    if (dir1 > 0 && dir1 < 90) {
-      direction = map(dir1, 0, 90, 10, 45);
-    } else if (dir1 < 0) {
-      direction = map(dir1, -90, 0, 45, 80);
+        particle = [];
+        particlenew = [];
+        j_count = 0;
+      }
     }
-    print(dir1 + ',' + direction);
-    startX = beginX;
-    startY = beginY;
 
   } else {
     if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
@@ -161,9 +171,9 @@ function mouseReleased() {
 
 function mousePressed() {
   if (selectPattern == 'circles') {
-    particle = [];
-    particlenew = [];
-    j_count = 0;
+    // particle = [];
+    // particlenew = [];
+    // j_count = 0;
     beginX = mouseX;
     beginY = mouseY;
   }

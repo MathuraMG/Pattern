@@ -1,11 +1,11 @@
 function saveFn() {
-  push();
-  colorMode(RGB);
-  stroke(0);
-  strokeWeight(2);
-  fill(0);
-  ellipse(paletteX, paletteY,100,100);
-  pop();
+  // push();
+  // colorMode(RGB);
+  // stroke(0);
+  // strokeWeight(2);
+  // fill(0);
+  // ellipse(paletteX, paletteY,100,100);
+  // pop();
   saveCanvas('pattern', 'png');
 }
 
