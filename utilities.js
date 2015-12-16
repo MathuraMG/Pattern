@@ -1,11 +1,4 @@
 function saveFn() {
-  // push();
-  // colorMode(RGB);
-  // stroke(0);
-  // strokeWeight(2);
-  // fill(0);
-  // ellipse(paletteX, paletteY,100,100);
-  // pop();
   saveCanvas('pattern', 'png');
 }
 
@@ -33,8 +26,7 @@ function gridFn() {
 function refreshFn() {
   //blendMode(BLEND );
   pg = [];
-  // pgTwo = createGraphics(fWidth / xsplit.value(), fHeight / ysplit.value());
-  //pgThree = createGraphics(fWidth / xsplit.value(), fHeight / ysplit.value());
+ 
   pgTwo.background(overallBG);
   pgThree.background(overallBG);
 

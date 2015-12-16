@@ -12,16 +12,6 @@ function drawHomePage() {
 
   var imgSize = windowHeight / 6;
 
-  // var homePageText = createDiv('Pick your poison');
-  // homePageText.style('color', 'white');
-  // homePageText.style('text-align', 'center');
-  // homePageText.style('position', 'absolute');
-  // homePageText.style('width', '100%');
-  // homePageText.style('top', '20%');
-  // homePageText.style('font-family', 'Raleway');
-  // homePageText.style('font-weight', '200');
-  // homePageText.style('font-size', '72px');
-
   var homePageBack = createDiv('');
   homePageBack.position(0, 0);
   homePageBack.size(windowWidth, windowHeight);
@@ -306,43 +296,20 @@ function canvasGraphics() {
 }
 
 function drawPalette(centerX, centerY) {
-  // push();
-  // //print('drawing palette');
-  // //background(0);
-  //   angleMode(DEGREES);
-  // colorMode(HSB);
-  // translate(centerX, centerY);
-  // strokeWeight(1);
-  // for (var i = 0; i < 360; i++) {
-  //   rotate(1);
-  //   stroke(i, 70, 70);
-  //   line(0, 0, 0, -50);
-  // }
-  // pop();
-  // fill(0);
-  // ellipse(centerX, centerY, 40, 40);
-  
+
   var img = createImg('assets/pallette1.png');
-  img.position(centerX-70, centerY-60);
+  img.position(centerX - 70, centerY - 60);
   img.style('z-index', -1);
 
 }
 
 function drawPaletteMarker(centerX, centerY, hueStart) {
-  // push();
-  // angleMode(DEGREES);
-  // colorMode(RGB);
-  // translate(centerX, centerY);
-  // rotate(hueStart + 180);
-  // noStroke();
-  // fill(255);
-  // ellipse(0, 35, 10, 10);
-  // pop();
+
   push();
   angleMode(DEGREES);
-  
-  pMarkerImg.position(centerX-5+40*sin(-hueStart-180),centerY-5+40*cos(hueStart+180));
-  pMarkerImg.size(10,10);
-  pMarkerImg.style('z-index',-0.9);
+
+  pMarkerImg.position(centerX - 5 + 40 * sin(-hueStart - 180), centerY - 5 + 40 * cos(hueStart + 180));
+  pMarkerImg.size(10, 10);
+  pMarkerImg.style('z-index', -0.9);
   pop();
 }

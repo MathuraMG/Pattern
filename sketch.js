@@ -104,20 +104,28 @@ function draw() {
     //blendMode(LIGHTEST);
     lineArt(selectX, selectY, hueStart);
 
+  } else if (selectPattern == 'fractals') {
+    //print(fractals.length);
+    for (var i = 0; i < fractals.length; i++) {
+      fractals[i].drawFractal();
+    }
   }
   //blendMode(BLEND );
 
   drawPaletteMarker(paletteX, paletteY, hueStart);
   textInstructions();
 
+
 }
 
 function mouseDragged() {
   if (selectPattern == 'fractals') {
-    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
-      setSelect();
-      fractalArt(selectX, selectY);
+    if (frameCount % 10 == 0) {
+      if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+        setSelect();
+        fractalArt(selectX, selectY);
 
+      }
     }
   }
 }
@@ -145,13 +153,13 @@ function mouseReleased() {
       endY = mouseY;
       sideVal = dist(beginX, beginY, endX, endY);
       var dir1 = atan((endY - beginY) / (endX - beginX));
-      if (true){//endY >= beginY) {
+      if (true) { //endY >= beginY) {
         if (dir1 > 0 && dir1 < 90) {
           direction = map(dir1, 0, 90, 10, 45);
         } else if (dir1 < 0) {
           direction = map(dir1, -90, 0, 45, 80);
         }
-        print(dir1 + ',' + direction);
+        //print(dir1 + ',' + direction);
         startX = beginX;
         startY = beginY;
         setSelect();
