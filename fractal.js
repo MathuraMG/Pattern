@@ -34,7 +34,7 @@ function curvesBW(lines1, lines2, i, hs, pgThree) {
   l = new elt();
   l.init(mouseX, mouseY, pgThree);
   colorMode(HSB);
-  stroke(hs + abs((frameCount % 50) - 25), 100, 100, 50);
+  stroke(hs + abs((frameCount % 50) - 25), overAllSat,overAllBr, 50);
   for (var a = 1; a < lines2.ax.length; a++) {
     l.ax[a] = lines1.ax[a] + ((lines2.ax[a] - lines1.ax[a]) / numLines) * i;
     l.ay[a] = lines1.ay[a] + ((lines2.ay[a] - lines1.ay[a]) / numLines) * i;
@@ -55,7 +55,7 @@ function fractalArt(xPoint, yPoint) {
   push();
   colorMode(HSB);
   var distFromCenter = dist(xPoint, yPoint, canvasWidth / 2, canvasHeight / 2);
-  var circleSize = (canvasWidth / 17 - distFromCenter / 6);
+  var circleSize = (canvasWidth / 17 - distFromCenter / 4);
   circleHue = map(distFromCenter, 0, sqrt((canvasWidth * canvasWidth + canvasHeight * canvasHeight) / 4), hueStart, hueStart + 50);
 
   cS = map(distFromCenter, 0, 350, 10, 70);
@@ -87,7 +87,7 @@ function fractalCircle(x, y, size, circleHue, pgOne) {
     if (this.count < 7) {
 
       var i = this.count;
-      if (frameCount % 5 == 0) {
+      if (frameCount % 2 == 0) {
         this.count = this.count + 1;
 
         for (var j = 0; j < this.circles.length; j++) {
@@ -147,7 +147,7 @@ function circleArtPiece(x, y, sizeX, sizeY, lineHue, pgOne) {
   this.drawFractal = function() {
     colorMode(HSB);
     strokeWeight(0.5);
-    pgOne.stroke(lineHue, 100, 100);
+    pgOne.stroke(lineHue, overAllSat,overAllBr);
     noFill();
     pgOne.ellipse(x, y, sizeX, sizeY);
   }
@@ -162,9 +162,9 @@ function lineArtPiece(x, y, sizeX, sizeY, lineHue, pgOne) {
   this.drawFractal = function() {
     colorMode(HSB);
     strokeWeight(0.5);
-    pgOne.stroke(lineHue, 100, 100);
+    stroke(lineHue, overAllSat,overAllBr);
     noFill();
-    pgOne.line(x, y, sizeX, sizeY);
+    line(x, y, sizeX, sizeY);
   }
 }
 
@@ -172,7 +172,7 @@ function drawSq(startX, startY, sideVal, hueColour) {
 
   angleMode(DEGREES);
   //function treeFr(x, y, ratio, angle,type,flag)
-  fill(hueColour, 100, 100);
+  fill(hueColour, overAllSat,overAllBr);
   noStroke();
   particle[0] = new treeFr(startX, startY, sideVal, 1, 0, 0, 0, direction);
   a = particle[0].display();
@@ -189,7 +189,7 @@ function drawSq(startX, startY, sideVal, hueColour) {
     var j = j_count;
     l = particle.length;
     count = 0;
-    fill(hueColour - 5 * j, 100, 100);
+    fill(hueColour - 5 * j, overAllSat,overAllBr);
     noStroke();
 
     for (var i = 0; i < l; i++) {

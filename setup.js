@@ -15,7 +15,7 @@ function drawHomePage() {
   var homePageBack = createDiv('');
   homePageBack.position(0, 0);
   homePageBack.size(windowWidth, windowHeight);
-  homePageBack.style('background-color', 'black', 'z-index', 5);
+  homePageBack.style('background-color', '#f8f8df', 'z-index', 5);
   homePageBack.id('homePageBack');
 
 

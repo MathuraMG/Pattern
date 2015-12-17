@@ -14,7 +14,7 @@ function circle(radius, x, y,flag,circleHue,pgOne, angle) {
     noFill();
     
     //pgOne.
-    stroke(this.circleHue,100,100);
+    stroke(this.circleHue,overAllSat,overAllBr);
     //pgOne.
     ellipse(x, y, radius * 2, radius * 2);
     return ({

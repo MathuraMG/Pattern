@@ -7,10 +7,11 @@ var fHeight = 800;
 var flag = 0;
 var inst = 'potato';
 var instDiv;
-var overallBG = 0;
+var overallBG = 255;
 var palletteImage;
 var pMarkerImg;
-
+var overAllSat = 30;
+var overAllBr = 92;
 var selectPattern = "";
 
 //DRAWING VARIABLES
@@ -77,6 +78,7 @@ function preload() {
 }
 
 function setup() {
+  overallBG = color("#f8f8dc");
   background(overallBG);
   setupFnButtons();
   //setupSliders();
@@ -99,7 +101,7 @@ function draw() {
 
     drawSq(startX, startY, sideVal, hueStart);
 
-  } else if (selectPattern == 'lines' &&pause == false) {
+  } else if (selectPattern == 'lines' && pause == false && brTrue == true) {
     //background(overallBG);
     //blendMode(LIGHTEST);
     lineArt(selectX, selectY, hueStart);
@@ -120,13 +122,15 @@ function draw() {
 
 function mouseDragged() {
   if (selectPattern == 'fractals') {
-    if (frameCount % 10 == 0) {
+    //if (frameCount % 2 == 0) {
       if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
-        setSelect();
-        fractalArt(selectX, selectY);
-
+        if(dist(mouseX,mouseY,selectX,selectY) >30)
+        {
+          setSelect();
+          fractalArt(selectX, selectY);
+        }
       }
-    }
+    //}
   }
 }
 
@@ -140,18 +144,18 @@ function mouseReleased() {
       //blendMode(LIGHTEST);
       l = new elt();
       setSelect();
-      l.init(selectX, selectY);//,selectX+200, selectY);
+      l.init(selectX, selectY); //,selectX+200, selectY);
       strokeWeight(0);
       l.drawLine();
       linesBr[0] = l;
-      
+      brTrue = true;
     }
 
   } else if (selectPattern == 'circles') {
     if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
       endX = mouseX;
       endY = mouseY;
-      
+
       var dir1 = atan((endY - beginY) / (endX - beginX));
       if (true) { //endY >= beginY) {
         if (dir1 > 0 && dir1 < 90) {
@@ -160,8 +164,8 @@ function mouseReleased() {
           direction = map(dir1, -90, 0, 45, 80);
         }
         var a = abs(direction);
-        var b = map(a,0,90,3,5);
-        sideVal = dist(beginX, beginY, endX, endY)/b;
+        var b = map(a, 0, 90, 3, 5);
+        sideVal = dist(beginX, beginY, endX, endY) / b;
         //print(dir1 + ',' + direction);
         startX = beginX;
         startY = beginY;
