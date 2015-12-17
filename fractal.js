@@ -84,7 +84,7 @@ function fractalCircle(x, y, size, circleHue, pgOne) {
     fill(255, 255, 255);
     //ellipse(x,y,this.size,this.size);
 
-    if (this.count < 7) {
+    if (this.count < 5) {
 
       var i = this.count;
       if (frameCount % 2 == 0) {

@@ -67,10 +67,10 @@ function pauseFn() {
   pause = !pause;
   if (pause == true) {
     var pauseBtn = document.getElementById('pauseBtnImg');
-    pauseBtn.src = "assets/playBtn1.png";
+    pauseBtn.src = "assets/playBtn42.png";
   } else if (pause == false) {
     var pauseBtn = document.getElementById('pauseBtnImg');
-    pauseBtn.src = "assets/pauseBtn1.png";
+    pauseBtn.src = "assets/pauseBtn42.png";
   }
 }
 
@@ -85,7 +85,7 @@ function selectHueColor(paletteX, paletteY, hs) {
   colorMode(HSB);
   var r = dist(mouseX, mouseY, paletteX, paletteY);
   var hue = hs;
-  if (r > 20 && r < 50) {
+  if (r > 30 && r < 75) {
     var angle = atan((mouseY - paletteY) / (mouseX - paletteX));
     //angle = map(angle,-3.1428,3.1428,0,180);
     if (mouseX < paletteX) {

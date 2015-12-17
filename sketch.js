@@ -89,8 +89,8 @@ function setup() {
   canvasGraphics();
   selectButtonImg();
   drawHomePage();
-  paletteX = 100;
-  paletteY = windowHeight - 75;
+  paletteX = 125;
+  paletteY = windowHeight - 125;
   drawPalette(paletteX, paletteY);
   pMarkerImg = createImg('assets/pMarker.png');
 }
@@ -115,16 +115,17 @@ function draw() {
   //blendMode(BLEND );
 
   drawPaletteMarker(paletteX, paletteY, hueStart);
-  textInstructions();
+  //textInstructions();
 
 
 }
 
 function mouseDragged() {
+   hueStart = selectHueColor(paletteX, paletteY, hueStart);
   if (selectPattern == 'fractals') {
     //if (frameCount % 2 == 0) {
       if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
-        if(dist(mouseX,mouseY,selectX,selectY) >30)
+        if(dist(mouseX,mouseY,selectX,selectY) >60)
         {
           setSelect();
           fractalArt(selectX, selectY);
@@ -138,7 +139,7 @@ function mouseReleased() {
   hueStart = selectHueColor(paletteX, paletteY, hueStart);
 
   if (selectPattern == 'lines') {
-    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+    if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
       linesBr = [];
       brCount = 0;
       //blendMode(LIGHTEST);
@@ -152,7 +153,7 @@ function mouseReleased() {
     }
 
   } else if (selectPattern == 'circles') {
-    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+    if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
       endX = mouseX;
       endY = mouseY;
 
@@ -178,7 +179,7 @@ function mouseReleased() {
     }
 
   } else {
-    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+    if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
       setSelect();
     }
   }

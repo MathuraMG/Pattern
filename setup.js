@@ -10,12 +10,12 @@
 
 function drawHomePage() {
 
-  var imgSize = windowHeight / 6;
+  var imgSize = windowHeight / 4;
 
   var homePageBack = createDiv('');
   homePageBack.position(0, 0);
   homePageBack.size(windowWidth, windowHeight);
-  homePageBack.style('background-color', '#f8f8df', 'z-index', 5);
+  homePageBack.style('background-color', '#baf7ba', 'z-index', 5);
   homePageBack.id('homePageBack');
 
 
@@ -47,13 +47,13 @@ function drawHomePage() {
   button3.style('background-color', 'transparent');
   button3.style('border', '0px');
 
-  var image1 = createImg('assets/frBtn1.png');
+  var image1 = createImg('assets/crBtn42.png');
   image1.class('imgFrBtn');
   image1.size(imgSize, imgSize);
-  var image2 = createImg('assets/trBtn.png');
+  var image2 = createImg('assets/trBtn42.png');
   image2.class('imgFrBtn');
   image2.size(imgSize, imgSize);
-  var image3 = createImg('assets/brBtn1.png');
+  var image3 = createImg('assets/brBtn42.png');
   image3.class('imgFrBtn');
   image3.size(imgSize, imgSize);
 
@@ -138,14 +138,14 @@ function setupFnButtons() {
   button4.style('border', '0px');
 
 
-  var image1 = createImg('assets/saveBtn1.png');
+  var image1 = createImg('assets/saveBtn42.png');
   image1.class('imgBtn');
-  var image2 = createImg('assets/refreshBtn1.png');
+  var image2 = createImg('assets/refreshBtn42.png');
   image2.class('imgBtn');
-  var image3 = createImg('assets/pauseBtn1.png');
+  var image3 = createImg('assets/pauseBtn42.png');
   image3.class('imgBtn');
   image3.id('pauseBtnImg');
-  var image4 = createImg('assets/homeBtn1.png');
+  var image4 = createImg('assets/homeBtn42.png');
   image4.class('imgBtn');
 
   button1.child(image1);
@@ -154,10 +154,10 @@ function setupFnButtons() {
   button4.child(image4);
 
   a = document.getElementsByClassName('fnBtn');
-  var xPos = windowWidth * 0.8;
+  var xPos = windowWidth * 0.75;
   //var yPos = windowHeight * 0.8;
   for (var i = 0; i < a.length; i++) {
-    s = xPos + windowWidth * 0.05 * i;
+    s = xPos + windowWidth * 0.06 * i;
     s = s + "px";
     a[i].style.position = "absolute";
     a[i].style.left = s;
@@ -171,7 +171,7 @@ function setupFnButtons() {
 function selectButtonImg() {
   var xPos;
   var yPos;
-  size = windowHeight * 0.07;
+  size = windowHeight * 0.1;
   a = document.getElementsByClassName('imgBtn');
   for (var i = 0; i < a.length; i++) {
     s = size;
@@ -298,8 +298,9 @@ function canvasGraphics() {
 function drawPalette(centerX, centerY) {
 
   var img = createImg('assets/pallette1.png');
-  img.position(centerX - 70, centerY - 60);
+  img.position(centerX - 75, centerY - 75);
   img.style('z-index', -1);
+  img.size(150, 150);
 
 }
 
@@ -309,7 +310,7 @@ function drawPaletteMarker(centerX, centerY, hueStart) {
   angleMode(DEGREES);
 
   pMarkerImg.position(centerX - 5 + 40 * sin(-hueStart - 180), centerY - 5 + 40 * cos(hueStart + 180));
-  pMarkerImg.size(10, 10);
+  pMarkerImg.size(15, 15);
   pMarkerImg.style('z-index', -0.9);
   pop();
 }
