@@ -46,7 +46,7 @@ var canvArea;
 //BROWNIAN VARIABLES
 var num = 100;
 var range = 20;
-var numLines = 50;
+var numLines = 25;
 var linesBr = [];
 var brTrue = false;
 
@@ -99,7 +99,7 @@ function draw() {
 
     drawSq(startX, startY, sideVal, hueStart);
 
-  } else if (selectPattern == 'lines' && brTrue == true) {
+  } else if (selectPattern == 'lines' &&pause == false) {
     //background(overallBG);
     //blendMode(LIGHTEST);
     lineArt(selectX, selectY, hueStart);
@@ -140,18 +140,18 @@ function mouseReleased() {
       //blendMode(LIGHTEST);
       l = new elt();
       setSelect();
-      l.init(selectX, selectY);
+      l.init(selectX, selectY);//,selectX+200, selectY);
       strokeWeight(0);
       l.drawLine();
       linesBr[0] = l;
-      brTrue = true;
+      
     }
 
   } else if (selectPattern == 'circles') {
     if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
       endX = mouseX;
       endY = mouseY;
-      sideVal = dist(beginX, beginY, endX, endY);
+      
       var dir1 = atan((endY - beginY) / (endX - beginX));
       if (true) { //endY >= beginY) {
         if (dir1 > 0 && dir1 < 90) {
@@ -159,6 +159,9 @@ function mouseReleased() {
         } else if (dir1 < 0) {
           direction = map(dir1, -90, 0, 45, 80);
         }
+        var a = abs(direction);
+        var b = map(a,0,90,3,5);
+        sideVal = dist(beginX, beginY, endX, endY)/b;
         //print(dir1 + ',' + direction);
         startX = beginX;
         startY = beginY;
@@ -179,9 +182,7 @@ function mouseReleased() {
 
 function mousePressed() {
   if (selectPattern == 'circles') {
-    // particle = [];
-    // particlenew = [];
-    // j_count = 0;
+
     beginX = mouseX;
     beginY = mouseY;
   }

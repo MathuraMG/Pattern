@@ -11,11 +11,11 @@ function circleArt(selectX, selectY) {
 }
 
 function lineArt(selectX, selectY, hs) {
-  if (pause == false) {
+  
     brCount++;
     if ((brCount - 1) % numLines == 0) {
       l = new elt();
-      l.init(selectX, selectY, pgThree);
+      l.init(selectX, selectY);
       strokeWeight(0);
       l.drawLine();
       linesBr[((brCount - 1) / numLines) + 1] = l;
@@ -23,9 +23,9 @@ function lineArt(selectX, selectY, hs) {
       a = floor(((brCount - 1) / numLines));
       curvesBW(linesBr[a], linesBr[a + 1], (brCount - 1) % numLines, hs, pgThree);
     }
-  }
-  image(pgThree, 0, 0, fWidth, fHeight);
-  drawPalette(paletteX, paletteY);
+  
+  //image(pgThree, 0, 0, fWidth, fHeight);
+ // drawPalette(paletteX, paletteY);
 }
 
 
@@ -34,15 +34,15 @@ function curvesBW(lines1, lines2, i, hs, pgThree) {
   l = new elt();
   l.init(mouseX, mouseY, pgThree);
   colorMode(HSB);
-  pgThree.stroke(hs + abs((frameCount % 100) - 50), 100, 100, 50);
+  stroke(hs + abs((frameCount % 50) - 25), 100, 100, 50);
   for (var a = 1; a < lines2.ax.length; a++) {
     l.ax[a] = lines1.ax[a] + ((lines2.ax[a] - lines1.ax[a]) / numLines) * i;
     l.ay[a] = lines1.ay[a] + ((lines2.ay[a] - lines1.ay[a]) / numLines) * i;
     l.lax[a] = lines1.lax[a] + ((lines2.lax[a] - lines1.lax[a]) / numLines) * i;
     l.lay[a] = lines1.lay[a] + ((lines2.lay[a] - lines1.lay[a]) / numLines) * i;
-    pgThree.strokeWeight(0.5);
-    pgThree.line(l.ax[a], l.ay[a], l.ax[a - 1], l.ay[a - 1]);
-    pgThree.line(l.lax[a], l.lay[a], l.lax[a - 1], l.lay[a - 1]);
+    strokeWeight(0.5);
+    line(l.ax[a], l.ay[a], l.ax[a - 1], l.ay[a - 1]);
+    line(l.lax[a], l.lay[a], l.lax[a - 1], l.lay[a - 1]);
 
   }
 }
