@@ -60,26 +60,29 @@ function drawHomePage() {
   var homePageText1 = createDiv('Fractals');
   homePageText1.style('color', 'white');
   homePageText1.style('text-align', 'center');
-  homePageText1.position(windowWidth / 2 - imgSize * 2.5, windowHeight / 2 - imgSize);
-  homePageText1.style('font-family', 'Raleway');
+  homePageText1.position(windowWidth / 2 - imgSize * 2.3, windowHeight / 2 - imgSize);
+  homePageText1.style('font-family', 'CoverFont');
   homePageText1.style('font-weight', '200');
-  homePageText1.style('font-size', '24px');
+  homePageText1.class('TitleText');
+  homePageText1.style('font-size', '60px');
 
   var homePageText2 = createDiv('Pythogran');
   homePageText2.style('color', 'white');
   homePageText2.style('text-align', 'center');
-  homePageText2.position(windowWidth / 2 - imgSize * 0.5, windowHeight / 2 - imgSize);
-  homePageText2.style('font-family', 'Raleway');
+  homePageText2.position(windowWidth / 2 - imgSize*0.4 , windowHeight / 2 - imgSize);
+  homePageText2.style('font-family', 'CoverFont');
   homePageText2.style('font-weight', '200');
-  homePageText2.style('font-size', '24px');
+  homePageText2.style('font-size', '60px');
+  homePageText2.class('TitleText');
 
   var homePageText3 = createDiv('Brownian');
   homePageText3.style('color', 'white');
   homePageText3.style('text-align', 'center');
-  homePageText3.position(windowWidth / 2 + imgSize * 1.5, windowHeight / 2 - imgSize);
-  homePageText3.style('font-family', 'Raleway');
+  homePageText3.position(windowWidth / 2 + imgSize * 1.6, windowHeight / 2 - imgSize);
+  homePageText3.style('font-family', 'CoverFont');
   homePageText3.style('font-weight', '200');
-  homePageText3.style('font-size', '24px');
+  homePageText3.style('font-size', '60px');
+  homePageText3.class('TitleText');
 
   button1.child(image1);
   button1.parent(homePageBack);
@@ -92,14 +95,14 @@ function drawHomePage() {
   homePageText2.parent(homePageBack);
   homePageText3.parent(homePageBack);
 
-  var exampleLink = createA('assets/examples.jpg', 'Examples');
-  exampleLink.style('z-index', 5);
-  exampleLink.size(10, 10);
-  exampleLink.style('font-family', 'Raleway');
-  exampleLink.style('font-weight', '200');
-  exampleLink.style('font-size', '18px');
-  exampleLink.style('color', 'white');
-  exampleLink.parent(homePageBack);
+  // var exampleLink = createA('assets/examples.jpg', 'Examples');
+  // exampleLink.style('z-index', 5);
+  // exampleLink.size(10, 10);
+  // exampleLink.style('font-family', 'CoverFont');
+  // exampleLink.style('font-weight', '200');
+  // exampleLink.style('font-size', '18px');
+  // exampleLink.style('color', 'white');
+  // exampleLink.parent(homePageBack);
 
 }
 
@@ -249,7 +252,7 @@ function setupP() {
   instDiv.style('position', 'absolute');
 
 
-  instDiv.style('font-family', 'Raleway');
+  instDiv.style('font-family', 'CoverFont');
   instDiv.style('font-weight', '200');
   instDiv.style('font-size', '22px');
 }

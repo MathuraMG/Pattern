@@ -1,3 +1,10 @@
+@font-face
+{
+    font-family:"CoverFont";
+    src: url(font/Amatic-Bold.ttf);
+}
+
+
 body {
   background-color: #f8f8dc;
 }
@@ -20,4 +27,7 @@ button.fnBtn:hover {
 
 a#exampleImage{
   z-index: 10000;
+}
+.TitleText {
+  font-family : "CoverFont";
 }
