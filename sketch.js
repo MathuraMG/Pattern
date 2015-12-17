@@ -5,7 +5,7 @@ var totIt = 5;
 var fWidth = 800;
 var fHeight = 800;
 var flag = 0;
-var inst = 'potato';
+var inst = '';
 var instDiv;
 var overallBG = 255;
 var palletteImage;
