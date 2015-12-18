@@ -13,6 +13,7 @@ var pMarkerImg;
 var overAllSat = 40; //change to 50
 var overAllBr = 90;
 var selectPattern = "";
+var squares = [];
 
 var circleSize = 60;
 
@@ -76,8 +77,8 @@ var canvasHeight;
 
 var paletteX, paletteY;
 
-var ptouchx = [-60,-60,-60,-60,-60];
-var ptouchy = [-60,-60,-60,-60,-60];
+var ptouchx = [-60, -60, -60, -60, -60];
+var ptouchy = [-60, -60, -60, -60, -60];
 
 
 function preload() {
@@ -90,9 +91,6 @@ function setup() {
   overallBG = color("#f8f8dc");
   background(overallBG);
   setupFnButtons();
-  //setupSliders();
-  //setupColorPallete();
-
   setupP();
   initMusic();
   canvasGraphics();
@@ -107,15 +105,15 @@ function setup() {
 function draw() {
 
   if (selectPattern == 'circles' && pause == false) {
+    for (var i = 0; i < squares.length; i++) {
+      squares[i].drawSqFractal();
+    }
 
-    drawSq(startX, startY, sideVal, hueStart);
 
   } else if (selectPattern == 'lines' && pause == false && brTrue == true) {
-    //background(overallBG);
-    //blendMode(LIGHTEST);
     lineArt(selectX, selectY, hueStart);
 
-  } else if (selectPattern == 'fractals') {
+  } else if (selectPattern == 'fractals' && pause == false) {
     for (var i = 0; i < fractals.length; i++) {
       fractals[i].drawFractal();
     }
@@ -188,6 +186,9 @@ function mouseReleased() {
         particle = [];
         particlenew = [];
         j_count = 0;
+        var s = new sqFractal(startX, startY, sideVal, hueStart, direction);
+        s.init();
+        squares.push(s);
       }
     }
 
@@ -255,6 +256,10 @@ function touchEnded() {
       particle = [];
       particlenew = [];
       j_count = 0;
+      var s = new sqFractal(startX, startY, sideVal, hueStart, direction);
+      s.init();
+      squares.push(s);
+      print(squares.length);
     }
   }
 
@@ -266,11 +271,11 @@ function touchMoved() {
   if (selectPattern == 'fractals') {
     strokeWeight(1);
     for (var i = 0; i < touches.length; i++) {
-      print(ptouchx[i]);
+      
       var tX = touches[i].x;
       var tY = touches[i].y;
       if ((tX < paletteX + 50 && tY > paletteY - 50) || (tY > 0.8 * windowHeight && tX > windowWidth * 0.8)) {} else {
-        if (dist(tX, tY, ptouchx[i], ptouchy[i]) > 60 ) {
+        if (dist(tX, tY, ptouchx[i], ptouchy[i]) > 60) {
           ptouchx[i] = tX;
           ptouchy[i] = tY;
           fractalArt(tX, tY);

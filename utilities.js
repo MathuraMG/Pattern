@@ -26,7 +26,7 @@ function gridFn() {
 function refreshFn() {
   //blendMode(BLEND );
 
-
+  squares = [];
   fractals = [];
   linePosX = 0;
   brCount = 0;

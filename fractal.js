@@ -53,7 +53,7 @@ function fractalArt(xPoint, yPoint) {
   push();
   colorMode(HSB);
   var distFromCenter = dist(xPoint, yPoint, canvasWidth / 2, canvasHeight / 2);
-  circleSize = (canvasWidth / 17 - distFromCenter / 4);
+  circleSize = (canvasWidth / 20 - distFromCenter / 12)/2;
   circleHue = map(distFromCenter, 0, sqrt((canvasWidth * canvasWidth + canvasHeight * canvasHeight) / 4), hueStart, hueStart + 50);
 
   cS = map(distFromCenter, 0, 350, 10, 70);
@@ -166,39 +166,57 @@ function lineArtPiece(x, y, sizeX, sizeY, lineHue) {
   }
 }
 
-function drawSq(startX, startY, sideVal, hueColour) {
-
-  angleMode(DEGREES);
+function sqFractal(startX, startY, sideVal, hueColour,direction){
+  this.startX = startX;
+  this.startY = startY;
+  this.sideVal = sideVal;
+  this.hueColour = hueColour;
+  this.direction = direction;
+  this.j_count = 0;
+  this.particle = [];
+  this.particlenew = [];
+  this.init = function(){
+    this.j_count = 0;
+    this.particle = [];
+  }
+  this.drawSqFractal = function() {
+    angleMode(DEGREES);
   //function treeFr(x, y, ratio, angle,type,flag)
   fill(hueColour, overAllSat,overAllBr);
   noStroke();
-  particle[0] = new treeFr(startX, startY, sideVal, 1, 0, 0, 0, direction);
-  a = particle[0].display();
+  this.particle[0] = new treeFr(this.startX, this.startY, this.sideVal, 1, 0, 0, 0, this.direction);
+  a = this.particle[0].display();
   push();
 
-  translate(startX, startY);
-  if (j_count == 0) {
-    rect(0, -sideVal, sideVal, sideVal);
+  translate(this.startX, this.startY);
+  if (this.j_count == 0) {
+    rect(0, -this.sideVal, this.sideVal, this.sideVal);
   }
   pop();
 
-  if (frameCount % 3 == 0 && j_count < 12) {
-    j_count++;
-    var j = j_count;
-    l = particle.length;
+  if (frameCount % 2 == 0 && this.j_count < 11) {
+    this.j_count++;
+    var j = this.j_count;
+    l = this.particle.length;
     count = 0;
-    fill(hueColour - 5 * j, overAllSat,overAllBr);
+    fill(this.hueColour - 5 * j, overAllSat,overAllBr);
     noStroke();
 
     for (var i = 0; i < l; i++) {
-      if (particle[i].flag == (j - 1)) {
-        a = particle[i].display();
-        particlenew[count++] = new treeFr(a.x2, a.y2, sideVal, a.ratio, a.angle, 2, j, direction);
-        particlenew[count++] = new treeFr(a.x1, a.y1, sideVal, a.ratio, a.angle, 1, j, direction);
+      if (this.particle[i].flag == (j - 1)) {
+        a = this.particle[i].display();
+        this.particlenew[count++] = new treeFr(a.x2, a.y2, this.sideVal, a.ratio, a.angle, 2, j, this.direction);
+        this.particlenew[count++] = new treeFr(a.x1, a.y1, this.sideVal, a.ratio, a.angle, 1, j, this.direction);
 
       }
     }
-    particle = particle.concat(particlenew);
+    this.particle = this.particle.concat(this.particlenew);
   }
+  }
+}
+
+function drawSq(startX, startY, sideVal, hueColour) {
+
+  
 
 }
