@@ -23,9 +23,7 @@ function lineArt(selectX, selectY, hs) {
       a = floor(((brCount - 1) / numLines));
       curvesBW(linesBr[a], linesBr[a + 1], (brCount - 1) % numLines, hs);
     }
-  
-  //image(pgThree, 0, 0, fWidth, fHeight);
- // drawPalette(paletteX, paletteY);
+
 }
 
 
@@ -55,7 +53,7 @@ function fractalArt(xPoint, yPoint) {
   push();
   colorMode(HSB);
   var distFromCenter = dist(xPoint, yPoint, canvasWidth / 2, canvasHeight / 2);
-  var circleSize = (canvasWidth / 17 - distFromCenter / 4);
+  circleSize = (canvasWidth / 17 - distFromCenter / 4);
   circleHue = map(distFromCenter, 0, sqrt((canvasWidth * canvasWidth + canvasHeight * canvasHeight) / 4), hueStart, hueStart + 50);
 
   cS = map(distFromCenter, 0, 350, 10, 70);

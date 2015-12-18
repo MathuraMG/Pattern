@@ -10,9 +10,11 @@ var instDiv;
 var overallBG = 255;
 var palletteImage;
 var pMarkerImg;
-var overAllSat = 30; //change to 50
+var overAllSat = 40; //change to 50
 var overAllBr = 90;
 var selectPattern = "";
+
+var circleSize = 60;
 
 var fractalX = -60;
 var fractalY = -60;
@@ -110,9 +112,7 @@ function draw() {
     lineArt(selectX, selectY, hueStart);
 
   } else if (selectPattern == 'fractals') {
-    //print(fractals.length);
     for (var i = 0; i < fractals.length; i++) {
-      print('hello');
       fractals[i].drawFractal();
     }
   }
@@ -125,14 +125,14 @@ function draw() {
 }
 
 function mouseDragged() {
+  //print(circleSize);
   hueStart = selectHueColor(paletteX, paletteY, hueStart);
   if (selectPattern == 'fractals') {
     strokeWeight(1);
     //if (frameCount % 2 == 0) {
     if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
 
-      if(dist(mouseX, mouseY, fractalX, fractalY) > 60) {
-        print(fractalX + ',' + fractalY);
+      if (dist(mouseX, mouseY, fractalX, fractalY) > abs(circleSize) * 3) {
         //setSelect();
         fractalX = mouseX;
         fractalY = mouseY;
@@ -161,7 +161,7 @@ function mouseReleased() {
     }
 
   } else if (selectPattern == 'circles') {
-    
+
     if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
       endX = mouseX;
       endY = mouseY;
@@ -210,3 +210,48 @@ function keyPressed() {
     pauseFn();
   }
 }
+
+
+
+/*******************************************
+    TOUCH FUNCTIONS
+ *******************************************/
+
+function touchStarted() {
+  if (selectPattern == 'circles') {
+
+    beginX = touchX;
+    beginY = touchY;
+  }
+}
+
+function touchEnded() {
+  hueStart = selectHueColor(paletteX, paletteY, hueStart);
+  if (selectPattern == 'circles') {
+
+    //if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+      endX = touchX;
+      endY = touchY;
+
+      var dir1 = atan((endY - beginY) / (endX - beginX));
+      if (true) { //endY >= beginY) {
+        if (dir1 > 0 && dir1 < 90) {
+          direction = map(dir1, 0, 90, 10, 45);
+        } else if (dir1 < 0) {
+          direction = map(dir1, -90, 0, 45, 80);
+        }
+        var a = abs(direction);
+        var b = map(a, 0, 90, 3, 6);
+        sideVal = dist(beginX, beginY, endX, endY) / b;
+        //print(dir1 + ',' + direction);
+        startX = beginX;
+        startY = beginY;
+        setSelect();
+
+        particle = [];
+        particlenew = [];
+        j_count = 0;
+      }
+  }
+
+  }

@@ -54,6 +54,14 @@ function setSelect() {
   }
 }
 
+function setTouchSelect() {
+  if (touchX > 0 && touchX < canvasWidth && touchY > 0 && touchY < canvasHeight) {
+    selectX = touchX ;/// xsplit.value();
+    linePosX = touchX ;/// xsplit.value();
+    selectY = touchY ;/// ysplit.value();
+  }
+}
+
 function changeSelectPattern(a) {
   selectPattern = a;
   var homePageDiv = document.getElementById('homePageBack');
