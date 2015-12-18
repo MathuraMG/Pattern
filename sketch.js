@@ -76,6 +76,10 @@ var canvasHeight;
 
 var paletteX, paletteY;
 
+var ptouchx = [-60,-60,-60,-60,-60];
+var ptouchy = [-60,-60,-60,-60,-60];
+
+
 function preload() {
   notes = [loadSound('assets/bass.mp3'), loadSound('assets/drums.mp3'), loadSound('assets/piano.mp3')];
   palletteImage = loadImage('assets/pallette1.png');
@@ -230,28 +234,48 @@ function touchEnded() {
   if (selectPattern == 'circles') {
 
     //if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
-      endX = touchX;
-      endY = touchY;
+    endX = touchX;
+    endY = touchY;
 
-      var dir1 = atan((endY - beginY) / (endX - beginX));
-      if (true) { //endY >= beginY) {
-        if (dir1 > 0 && dir1 < 90) {
-          direction = map(dir1, 0, 90, 10, 45);
-        } else if (dir1 < 0) {
-          direction = map(dir1, -90, 0, 45, 80);
-        }
-        var a = abs(direction);
-        var b = map(a, 0, 90, 3, 6);
-        sideVal = dist(beginX, beginY, endX, endY) / b;
-        //print(dir1 + ',' + direction);
-        startX = beginX;
-        startY = beginY;
-        setSelect();
-
-        particle = [];
-        particlenew = [];
-        j_count = 0;
+    var dir1 = atan((endY - beginY) / (endX - beginX));
+    if (true) { //endY >= beginY) {
+      if (dir1 > 0 && dir1 < 90) {
+        direction = map(dir1, 0, 90, 10, 45);
+      } else if (dir1 < 0) {
+        direction = map(dir1, -90, 0, 45, 80);
       }
+      var a = abs(direction);
+      var b = map(a, 0, 90, 3, 6);
+      sideVal = dist(beginX, beginY, endX, endY) / b;
+      //print(dir1 + ',' + direction);
+      startX = beginX;
+      startY = beginY;
+      setSelect();
+
+      particle = [];
+      particlenew = [];
+      j_count = 0;
+    }
   }
 
+}
+
+function touchMoved() {
+
+  hueStart = selectHueColor(paletteX, paletteY, hueStart);
+  if (selectPattern == 'fractals') {
+    strokeWeight(1);
+    for (var i = 0; i < touches.length; i++) {
+      print(ptouchx[i]);
+      var tX = touches[i].x;
+      var tY = touches[i].y;
+      if ((tX < paletteX + 50 && tY > paletteY - 50) || (tY > 0.8 * windowHeight && tX > windowWidth * 0.8)) {} else {
+        if (dist(tX, tY, ptouchx[i], ptouchy[i]) > 60 ) {
+          ptouchx[i] = tX;
+          ptouchy[i] = tY;
+          fractalArt(tX, tY);
+        }
+      }
+    }
   }
+}
