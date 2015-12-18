@@ -10,9 +10,12 @@ var instDiv;
 var overallBG = 255;
 var palletteImage;
 var pMarkerImg;
-var overAllSat = 30;
-var overAllBr = 92;
+var overAllSat = 30; //change to 50
+var overAllBr = 90;
 var selectPattern = "";
+
+var fractalX = -60;
+var fractalY = -60;
 
 //DRAWING VARIABLES
 var circles = [];
@@ -109,6 +112,7 @@ function draw() {
   } else if (selectPattern == 'fractals') {
     //print(fractals.length);
     for (var i = 0; i < fractals.length; i++) {
+      print('hello');
       fractals[i].drawFractal();
     }
   }
@@ -121,16 +125,20 @@ function draw() {
 }
 
 function mouseDragged() {
-   hueStart = selectHueColor(paletteX, paletteY, hueStart);
+  hueStart = selectHueColor(paletteX, paletteY, hueStart);
   if (selectPattern == 'fractals') {
+    strokeWeight(1);
     //if (frameCount % 2 == 0) {
-      if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
-        if(dist(mouseX,mouseY,selectX,selectY) >60)
-        {
-          setSelect();
-          fractalArt(selectX, selectY);
-        }
+    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+
+      if(dist(mouseX, mouseY, fractalX, fractalY) > 60) {
+        print(fractalX + ',' + fractalY);
+        //setSelect();
+        fractalX = mouseX;
+        fractalY = mouseY;
+        fractalArt(fractalX, fractalY);
       }
+    }
     //}
   }
 }
@@ -153,6 +161,7 @@ function mouseReleased() {
     }
 
   } else if (selectPattern == 'circles') {
+    
     if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
       endX = mouseX;
       endY = mouseY;
@@ -165,7 +174,7 @@ function mouseReleased() {
           direction = map(dir1, -90, 0, 45, 80);
         }
         var a = abs(direction);
-        var b = map(a, 0, 90, 3, 5);
+        var b = map(a, 0, 90, 3, 6);
         sideVal = dist(beginX, beginY, endX, endY) / b;
         //print(dir1 + ',' + direction);
         startX = beginX;

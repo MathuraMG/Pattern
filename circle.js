@@ -1,10 +1,10 @@
-function circle(radius, x, y,flag,circleHue,pgOne, angle) {
+function circle(radius, x, y,flag,circleHue, angle) {
   this.x = x;
   this.y = y;
   this.radius = radius;
   this.flag = flag;
   this.circleHue = circleHue;
-  this.pgOne = pgOne;
+  //this.pgOne = pgOne;
   this.angle = angle;
   
   

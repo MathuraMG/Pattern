@@ -25,10 +25,7 @@ function gridFn() {
 
 function refreshFn() {
   //blendMode(BLEND );
-  pg = [];
- 
-  pgTwo.background(overallBG);
-  pgThree.background(overallBG);
+
 
   fractals = [];
   linePosX = 0;

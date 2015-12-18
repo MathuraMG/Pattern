@@ -1,13 +1,13 @@
 function circleArt(selectX, selectY) {
   if (pause == false) {
     linePosX++;
-    f = new circleArtPiece((linePosX) % (width + 100), selectY, (mouseY - height / 2) / (2 * 1), (mouseY - height / 2) / 2 * (1), hueStart + map(mouseX, 0, width, 0, 50), pgTwo);
+    f = new circleArtPiece((linePosX) % (width + 100), selectY, (mouseY - height / 2) / (2 * 1), (mouseY - height / 2) / 2 * (1), hueStart + map(mouseX, 0, width, 0, 50));
     f.drawFractal();
   }
   push();
   colorMode(RGB);
   pop();
-  image(pgTwo, 0, 0, fWidth, fHeight);
+  
 }
 
 function lineArt(selectX, selectY, hs) {
@@ -21,7 +21,7 @@ function lineArt(selectX, selectY, hs) {
       linesBr[((brCount - 1) / numLines) + 1] = l;
     } else {
       a = floor(((brCount - 1) / numLines));
-      curvesBW(linesBr[a], linesBr[a + 1], (brCount - 1) % numLines, hs, pgThree);
+      curvesBW(linesBr[a], linesBr[a + 1], (brCount - 1) % numLines, hs);
     }
   
   //image(pgThree, 0, 0, fWidth, fHeight);
@@ -29,10 +29,10 @@ function lineArt(selectX, selectY, hs) {
 }
 
 
-function curvesBW(lines1, lines2, i, hs, pgThree) {
+function curvesBW(lines1, lines2, i, hs) {
 
   l = new elt();
-  l.init(mouseX, mouseY, pgThree);
+  l.init(mouseX, mouseY);
   colorMode(HSB);
   stroke(hs + abs((frameCount % 50) - 25), overAllSat,overAllBr, 50);
   for (var a = 1; a < lines2.ax.length; a++) {
@@ -59,7 +59,7 @@ function fractalArt(xPoint, yPoint) {
   circleHue = map(distFromCenter, 0, sqrt((canvasWidth * canvasWidth + canvasHeight * canvasHeight) / 4), hueStart, hueStart + 50);
 
   cS = map(distFromCenter, 0, 350, 10, 70);
-  f = new fractalCircle(xPoint, yPoint, circleSize, circleHue, pgOne);
+  f = new fractalCircle(xPoint, yPoint, circleSize, circleHue);
   f.create();
   fractals.push(f);
 
@@ -67,7 +67,7 @@ function fractalArt(xPoint, yPoint) {
 
 }
 
-function fractalCircle(x, y, size, circleHue, pgOne) {
+function fractalCircle(x, y, size, circleHue) {
   this.x = x;
   this.y = y;
   this.circleHue = circleHue;
@@ -75,7 +75,7 @@ function fractalCircle(x, y, size, circleHue, pgOne) {
   this.count = 0;
   this.circles = [];
   this.create = function() {
-    a = new circle(this.size, this.x, this.y, 0, this.circleHue, pgOne, 0);
+    a = new circle(this.size, this.x, this.y, 0, this.circleHue, 0);
     this.circles.push(a);
     a.draw();
   }
@@ -105,9 +105,9 @@ function fractalCircle(x, y, size, circleHue, pgOne) {
                 newy2 = val.y - r * sin(angle);
                 newy1 = val.y + r * sin(angle);
 
-                b1 = new circle(val.radius, newx1, newy1, i + 1, this.circleHue+i*10, pgOne, k);
+                b1 = new circle(val.radius, newx1, newy1, i + 1, this.circleHue+i*10, k);
                 this.circles.push(b1);
-                b2 = new circle(val.radius, newx2, newy2, i + 1, this.circleHue+i*10, pgOne, k);
+                b2 = new circle(val.radius, newx2, newy2, i + 1, this.circleHue+i*10, k);
                 this.circles.push(b2);
               } else {
                 if (this.circles[j].angle == k) {
@@ -121,9 +121,9 @@ function fractalCircle(x, y, size, circleHue, pgOne) {
                   newy2 = val.y - r * sin(angle);
                   newy1 = val.y + r * sin(angle);
 
-                  b1 = new circle(val.radius, newx1, newy1, i + 1, this.circleHue, pgOne, val.angle);
+                  b1 = new circle(val.radius, newx1, newy1, i + 1, this.circleHue, val.angle);
                   this.circles.push(b1);
-                  b2 = new circle(val.radius, newx2, newy2, i + 1, this.circleHue, pgOne, val.angle);
+                  b2 = new circle(val.radius, newx2, newy2, i + 1, this.circleHue, val.angle);
                   this.circles.push(b2);
                 }
               }
@@ -138,7 +138,7 @@ function fractalCircle(x, y, size, circleHue, pgOne) {
 }
 
 
-function circleArtPiece(x, y, sizeX, sizeY, lineHue, pgOne) {
+function circleArtPiece(x, y, sizeX, sizeY, lineHue) {
   this.x = x;
   this.y = y;
   this.lineHue = lineHue;
@@ -147,13 +147,13 @@ function circleArtPiece(x, y, sizeX, sizeY, lineHue, pgOne) {
   this.drawFractal = function() {
     colorMode(HSB);
     strokeWeight(0.5);
-    pgOne.stroke(lineHue, overAllSat,overAllBr);
+    stroke(lineHue, overAllSat,overAllBr);
     noFill();
-    pgOne.ellipse(x, y, sizeX, sizeY);
+    ellipse(x, y, sizeX, sizeY);
   }
 }
 
-function lineArtPiece(x, y, sizeX, sizeY, lineHue, pgOne) {
+function lineArtPiece(x, y, sizeX, sizeY, lineHue) {
   this.x = x;
   this.y = y;
   this.lineHue = lineHue;
