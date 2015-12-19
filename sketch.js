@@ -69,7 +69,7 @@ var frame = 0;
 var totAngle;
 var fractal = 1;
 var sideVal;
-var pause = true;
+
 var direction = 45;
 
 var canvasWidth;
@@ -80,10 +80,18 @@ var paletteX, paletteY;
 var ptouchx = [-60, -60, -60, -60, -60];
 var ptouchy = [-60, -60, -60, -60, -60];
 
+var brHand;
+var trHand;
+var crHand;
+var handScaleFactor = 0.5;
+
 
 function preload() {
   notes = [loadSound('assets/bass.mp3'), loadSound('assets/drums.mp3'), loadSound('assets/piano.mp3')];
   palletteImage = loadImage('assets/pallette1.png');
+  brHand = loadImage('assets/brHand.png');
+  trHand = loadImage('assets/trHand.png');
+  crHand = loadImage('assets/crHand.png');
 
 }
 
@@ -100,6 +108,7 @@ function setup() {
   paletteY = windowHeight - 125;
   drawPalette(paletteX, paletteY);
   pMarkerImg = createImg('assets/pMarker.png');
+  refreshFn();
 }
 
 function draw() {
@@ -121,6 +130,7 @@ function draw() {
   //blendMode(BLEND );
 
   drawPaletteMarker(paletteX, paletteY, hueStart);
+  drawImageGestures();
   //textInstructions();
 
 

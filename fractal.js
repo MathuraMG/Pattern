@@ -47,7 +47,6 @@ function curvesBW(lines1, lines2, i, hs) {
 
 
 function fractalArt(xPoint, yPoint) {
-  //background(overallBG);
   cWidth = fWidth / 1; //xsplit.value();
   cHeight = fHeight / 1; //ysplit.value();
   push();

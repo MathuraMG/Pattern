@@ -33,6 +33,7 @@ function drawHomePage() {
   button2.class('selectBtn');
   button2.mouseClicked(function() {
     changeSelectPattern('circles');
+    
   });
   button2.position(windowWidth / 2 - imgSize * 0.5, windowHeight / 2 - imgSize * 0.5);
   button2.style('background-color', 'transparent');
@@ -169,6 +170,21 @@ function setupFnButtons() {
     yPos = yPos + "px";
     a[i].style.top = yPos;
   }
+}
+
+function drawImageGestures(){
+  push();
+  scale(handScaleFactor,handScaleFactor);
+   if (selectPattern == 'circles') {
+    image(trHand,10,10);
+  } else if (selectPattern == 'fractals') {
+    image(crHand,10,10);
+  } else if (selectPattern == 'lines') {
+    image(brHand,10,10);
+  } else {
+    
+  }
+  pop();
 }
 
 function selectButtonImg() {
