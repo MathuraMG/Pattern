@@ -10,25 +10,15 @@
 
 function drawHomePage() {
 
-  var imgSize = windowHeight / 6;
-
-  // var homePageText = createDiv('Pick your poison');
-  // homePageText.style('color', 'white');
-  // homePageText.style('text-align', 'center');
-  // homePageText.style('position', 'absolute');
-  // homePageText.style('width', '100%');
-  // homePageText.style('top', '20%');
-  // homePageText.style('font-family', 'Raleway');
-  // homePageText.style('font-weight', '200');
-  // homePageText.style('font-size', '72px');
+  var imgSize = windowHeight / 4;
 
   var homePageBack = createDiv('');
   homePageBack.position(0, 0);
   homePageBack.size(windowWidth, windowHeight);
-  homePageBack.style('background-color', 'black', 'z-index', 5);
+  homePageBack.style('background-color', '#baf7ba', 'z-index', 5);
   homePageBack.id('homePageBack');
-  
-  
+
+
 
   var button1 = createButton('');
   button1.class('selectBtn');
@@ -43,6 +33,7 @@ function drawHomePage() {
   button2.class('selectBtn');
   button2.mouseClicked(function() {
     changeSelectPattern('circles');
+    
   });
   button2.position(windowWidth / 2 - imgSize * 0.5, windowHeight / 2 - imgSize * 0.5);
   button2.style('background-color', 'transparent');
@@ -57,39 +48,42 @@ function drawHomePage() {
   button3.style('background-color', 'transparent');
   button3.style('border', '0px');
 
-  var image1 = createImg('assets/frBtn1.png');
+  var image1 = createImg('assets/crBtn42.png');
   image1.class('imgFrBtn');
   image1.size(imgSize, imgSize);
-  var image2 = createImg('assets/trBtn.png');
+  var image2 = createImg('assets/trBtn42.png');
   image2.class('imgFrBtn');
   image2.size(imgSize, imgSize);
-  var image3 = createImg('assets/brBtn1.png');
+  var image3 = createImg('assets/brBtn42.png');
   image3.class('imgFrBtn');
   image3.size(imgSize, imgSize);
-  
+
   var homePageText1 = createDiv('Fractals');
   homePageText1.style('color', 'white');
   homePageText1.style('text-align', 'center');
-  homePageText1.position(windowWidth / 2 - imgSize * 2.5, windowHeight / 2 - imgSize);
-  homePageText1.style('font-family', 'Raleway');
+  homePageText1.position(windowWidth / 2 - imgSize * 2.3, windowHeight / 2 - imgSize);
+  homePageText1.style('font-family', 'CoverFont');
   homePageText1.style('font-weight', '200');
-  homePageText1.style('font-size', '24px');
-  
+  homePageText1.class('TitleText');
+  homePageText1.style('font-size', '60px');
+
   var homePageText2 = createDiv('Pythogran');
   homePageText2.style('color', 'white');
   homePageText2.style('text-align', 'center');
-  homePageText2.position(windowWidth / 2 - imgSize * 0.5, windowHeight / 2 - imgSize);
-  homePageText2.style('font-family', 'Raleway');
+  homePageText2.position(windowWidth / 2 - imgSize*0.4 , windowHeight / 2 - imgSize);
+  homePageText2.style('font-family', 'CoverFont');
   homePageText2.style('font-weight', '200');
-  homePageText2.style('font-size', '24px');
-  
+  homePageText2.style('font-size', '60px');
+  homePageText2.class('TitleText');
+
   var homePageText3 = createDiv('Brownian');
   homePageText3.style('color', 'white');
   homePageText3.style('text-align', 'center');
-  homePageText3.position(windowWidth / 2 + imgSize * 1.5, windowHeight / 2 - imgSize);
-  homePageText3.style('font-family', 'Raleway');
+  homePageText3.position(windowWidth / 2 + imgSize * 1.6, windowHeight / 2 - imgSize);
+  homePageText3.style('font-family', 'CoverFont');
   homePageText3.style('font-weight', '200');
-  homePageText3.style('font-size', '24px');
+  homePageText3.style('font-size', '60px');
+  homePageText3.class('TitleText');
 
   button1.child(image1);
   button1.parent(homePageBack);
@@ -101,15 +95,15 @@ function drawHomePage() {
   homePageText1.parent(homePageBack);
   homePageText2.parent(homePageBack);
   homePageText3.parent(homePageBack);
-  
-  var exampleLink = createA('assets/examples.jpg','Examples');
-  exampleLink.style('z-index',5);
-  exampleLink.size(10,10);
-  exampleLink.style('font-family', 'Raleway');
-  exampleLink.style('font-weight', '200');
-  exampleLink.style('font-size', '18px');
-  exampleLink.style('color', 'white');
-  exampleLink.parent(homePageBack);
+
+  // var exampleLink = createA('assets/examples.jpg', 'Examples');
+  // exampleLink.style('z-index', 5);
+  // exampleLink.size(10, 10);
+  // exampleLink.style('font-family', 'CoverFont');
+  // exampleLink.style('font-weight', '200');
+  // exampleLink.style('font-size', '18px');
+  // exampleLink.style('color', 'white');
+  // exampleLink.parent(homePageBack);
 
 }
 
@@ -148,14 +142,14 @@ function setupFnButtons() {
   button4.style('border', '0px');
 
 
-  var image1 = createImg('assets/saveBtn1.png');
+  var image1 = createImg('assets/saveBtn42.png');
   image1.class('imgBtn');
-  var image2 = createImg('assets/refreshBtn1.png');
+  var image2 = createImg('assets/refreshBtn42.png');
   image2.class('imgBtn');
-  var image3 = createImg('assets/pauseBtn1.png');
+  var image3 = createImg('assets/pauseBtn42.png');
   image3.class('imgBtn');
   image3.id('pauseBtnImg');
-  var image4 = createImg('assets/homeBtn1.png');
+  var image4 = createImg('assets/homeBtn42.png');
   image4.class('imgBtn');
 
   button1.child(image1);
@@ -164,10 +158,10 @@ function setupFnButtons() {
   button4.child(image4);
 
   a = document.getElementsByClassName('fnBtn');
-  var xPos = windowWidth * 0.8;
+  var xPos = windowWidth * 0.75;
   //var yPos = windowHeight * 0.8;
   for (var i = 0; i < a.length; i++) {
-    s = xPos + windowWidth * 0.05 * i;
+    s = xPos + windowWidth * 0.06 * i;
     s = s + "px";
     a[i].style.position = "absolute";
     a[i].style.left = s;
@@ -178,10 +172,25 @@ function setupFnButtons() {
   }
 }
 
+function drawImageGestures(){
+  push();
+  scale(handScaleFactor,handScaleFactor);
+   if (selectPattern == 'circles') {
+    image(trHand,10,10);
+  } else if (selectPattern == 'fractals') {
+    image(crHand,10,10);
+  } else if (selectPattern == 'lines') {
+    image(brHand,10,10);
+  } else {
+    
+  }
+  pop();
+}
+
 function selectButtonImg() {
   var xPos;
   var yPos;
-  size = windowHeight * 0.07;
+  size = windowHeight * 0.1;
   a = document.getElementsByClassName('imgBtn');
   for (var i = 0; i < a.length; i++) {
     s = size;
@@ -259,14 +268,14 @@ function setupP() {
   instDiv.style('position', 'absolute');
 
 
-  instDiv.style('font-family', 'Raleway');
+  instDiv.style('font-family', 'CoverFont');
   instDiv.style('font-weight', '200');
   instDiv.style('font-size', '22px');
 }
 
 function textInstructions() {
   if (selectPattern == 'circles') {
-    inst = ' Press space to pause the drawing and move your mouse about the canvas to change size and colour';
+    inst = ' Drag on the canvas to create trees in the direction you want!';
   } else if (selectPattern == 'fractals') {
     inst = ' Click on the canvas to get a fractal burst';
   } else if (selectPattern == 'lines') {
@@ -299,40 +308,28 @@ function canvasGraphics() {
   cvs.style('z-index', '-1');
   ctx = canvas.getContext('2d');
   imgData = ctx.getImageData(0, 0, fWidth, fHeight)
-  pgTwo = createGraphics(fWidth, fHeight);
+  //pgTwo = createGraphics(fWidth, fHeight);
   //pgTwo.style('z-index', '-2');
-  pgThree = createGraphics(fWidth, fHeight);
+  //pgThree = createGraphics(fWidth, fHeight);
   // pgThree.style('z-index', '-2');
 }
 
 function drawPalette(centerX, centerY) {
-  push();
-  //print('drawing palette');
-  //background(0);
 
-  angleMode(DEGREES);
-  colorMode(HSB);
-  translate(centerX, centerY);
-  strokeWeight(1);
-  for (var i = 0; i < 360; i++) {
-    rotate(1);
-    stroke(i, 70, 70);
-    line(0, 0, 0, -50);
-  }
-  pop();
-  fill(0);
-  ellipse(centerX, centerY, 40, 40);
+  var img = createImg('assets/pallette1.png');
+  img.position(centerX - 75, centerY - 75);
+  img.style('z-index', -1);
+  img.size(150, 150);
+
 }
 
 function drawPaletteMarker(centerX, centerY, hueStart) {
+
   push();
   angleMode(DEGREES);
-  colorMode(RGB);
-  translate(centerX, centerY);
-  rotate(hueStart+180);
-  noStroke();
-  fill(255);
-  ellipse(0, 35, 10, 10);
-  pop();
 
+  pMarkerImg.position(centerX - 5 + 40 * sin(-hueStart - 180), centerY - 5 + 40 * cos(hueStart + 180));
+  pMarkerImg.size(15, 15);
+  pMarkerImg.style('z-index', -0.9);
+  pop();
 }

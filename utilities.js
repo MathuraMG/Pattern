@@ -1,11 +1,4 @@
 function saveFn() {
-  push();
-  colorMode(RGB);
-  stroke(0);
-  strokeWeight(2);
-  fill(0);
-  ellipse(paletteX, paletteY,100,100);
-  pop();
   saveCanvas('pattern', 'png');
 }
 
@@ -32,12 +25,8 @@ function gridFn() {
 
 function refreshFn() {
   //blendMode(BLEND );
-  pg = [];
-  // pgTwo = createGraphics(fWidth / xsplit.value(), fHeight / ysplit.value());
-  //pgThree = createGraphics(fWidth / xsplit.value(), fHeight / ysplit.value());
-  pgTwo.background(overallBG);
-  pgThree.background(overallBG);
 
+  squares = [];
   fractals = [];
   linePosX = 0;
   brCount = 0;
@@ -65,6 +54,14 @@ function setSelect() {
   }
 }
 
+function setTouchSelect() {
+  if (touchX > 0 && touchX < canvasWidth && touchY > 0 && touchY < canvasHeight) {
+    selectX = touchX ;/// xsplit.value();
+    linePosX = touchX ;/// xsplit.value();
+    selectY = touchY ;/// ysplit.value();
+  }
+}
+
 function changeSelectPattern(a) {
   selectPattern = a;
   var homePageDiv = document.getElementById('homePageBack');
@@ -75,10 +72,10 @@ function pauseFn() {
   pause = !pause;
   if (pause == true) {
     var pauseBtn = document.getElementById('pauseBtnImg');
-    pauseBtn.src = "assets/playBtn1.png";
+    pauseBtn.src = "assets/playBtn42.png";
   } else if (pause == false) {
     var pauseBtn = document.getElementById('pauseBtnImg');
-    pauseBtn.src = "assets/pauseBtn1.png";
+    pauseBtn.src = "assets/pauseBtn42.png";
   }
 }
 
@@ -93,7 +90,7 @@ function selectHueColor(paletteX, paletteY, hs) {
   colorMode(HSB);
   var r = dist(mouseX, mouseY, paletteX, paletteY);
   var hue = hs;
-  if (r > 20 && r < 50) {
+  if (r > 30 && r < 75) {
     var angle = atan((mouseY - paletteY) / (mouseX - paletteX));
     //angle = map(angle,-3.1428,3.1428,0,180);
     if (mouseX < paletteX) {

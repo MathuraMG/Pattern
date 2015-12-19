@@ -5,12 +5,20 @@ var totIt = 5;
 var fWidth = 800;
 var fHeight = 800;
 var flag = 0;
-var inst = 'potato';
+var inst = '';
 var instDiv;
-var overallBG = 0;
-
-
+var overallBG = 255;
+var palletteImage;
+var pMarkerImg;
+var overAllSat = 40; //change to 50
+var overAllBr = 90;
 var selectPattern = "";
+var squares = [];
+
+var circleSize = 60;
+
+var fractalX = -60;
+var fractalY = -60;
 
 //DRAWING VARIABLES
 var circles = [];
@@ -45,7 +53,7 @@ var canvArea;
 //BROWNIAN VARIABLES
 var num = 100;
 var range = 20;
-var numLines = 50;
+var numLines = 25;
 var linesBr = [];
 var brTrue = false;
 
@@ -61,7 +69,7 @@ var frame = 0;
 var totAngle;
 var fractal = 1;
 var sideVal;
-var pause = true;
+
 var direction = 45;
 
 var canvasWidth;
@@ -69,91 +77,133 @@ var canvasHeight;
 
 var paletteX, paletteY;
 
+var ptouchx = [-60, -60, -60, -60, -60];
+var ptouchy = [-60, -60, -60, -60, -60];
+
+var brHand;
+var trHand;
+var crHand;
+var handScaleFactor = 0.5;
+
+
 function preload() {
   notes = [loadSound('assets/bass.mp3'), loadSound('assets/drums.mp3'), loadSound('assets/piano.mp3')];
+  palletteImage = loadImage('assets/pallette1.png');
+  brHand = loadImage('assets/brHand.png');
+  trHand = loadImage('assets/trHand.png');
+  crHand = loadImage('assets/crHand.png');
+
 }
 
 function setup() {
+  overallBG = color("#f8f8dc");
   background(overallBG);
   setupFnButtons();
-  //setupSliders();
-  //setupColorPallete();
-
   setupP();
   initMusic();
   canvasGraphics();
   selectButtonImg();
   drawHomePage();
-  paletteX = 100;
-  paletteY = windowHeight - 75;
-
+  paletteX = 125;
+  paletteY = windowHeight - 125;
+  drawPalette(paletteX, paletteY);
+  pMarkerImg = createImg('assets/pMarker.png');
+  refreshFn();
 }
 
 function draw() {
 
   if (selectPattern == 'circles' && pause == false) {
+    for (var i = 0; i < squares.length; i++) {
+      squares[i].drawSqFractal();
+    }
 
-    drawSq(startX, startY, sideVal, hueStart);
 
-  } else if (selectPattern == 'lines' && brTrue == true) {
-    background(overallBG);
-    //blendMode(LIGHTEST);
+  } else if (selectPattern == 'lines' && pause == false && brTrue == true) {
     lineArt(selectX, selectY, hueStart);
 
+  } else if (selectPattern == 'fractals' && pause == false) {
+    for (var i = 0; i < fractals.length; i++) {
+      fractals[i].drawFractal();
+    }
   }
   //blendMode(BLEND );
-  drawPalette(paletteX, paletteY);
+
   drawPaletteMarker(paletteX, paletteY, hueStart);
-  textInstructions();
+  drawImageGestures();
+  //textInstructions();
+
 
 }
 
 function mouseDragged() {
+  //print(circleSize);
+  hueStart = selectHueColor(paletteX, paletteY, hueStart);
+  if (selectPattern == 'fractals') {
+    strokeWeight(1);
+    //if (frameCount % 2 == 0) {
+    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
 
+      if (dist(mouseX, mouseY, fractalX, fractalY) > abs(circleSize) * 3) {
+        //setSelect();
+        fractalX = mouseX;
+        fractalY = mouseY;
+        fractalArt(fractalX, fractalY);
+      }
+    }
+    //}
+  }
 }
 
 function mouseReleased() {
   hueStart = selectHueColor(paletteX, paletteY, hueStart);
 
   if (selectPattern == 'lines') {
-    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+    if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
       linesBr = [];
       brCount = 0;
       //blendMode(LIGHTEST);
       l = new elt();
       setSelect();
-      l.init(selectX, selectY);
+      l.init(selectX, selectY); //,selectX+200, selectY);
       strokeWeight(0);
       l.drawLine();
       linesBr[0] = l;
       brTrue = true;
     }
 
-  } else if (selectPattern == 'fractals') {
-    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
-      setSelect();
-      fractalArt(selectX, selectY);
-
-    }
   } else if (selectPattern == 'circles') {
 
-    endX = mouseX;
-    endY = mouseY;
-    sideVal = dist(beginX, beginY, endX, endY);
-    var dir1 = atan((endY - beginY) / (endX - beginX));
+    if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+      endX = mouseX;
+      endY = mouseY;
 
+      var dir1 = atan((endY - beginY) / (endX - beginX));
+      if (true) { //endY >= beginY) {
+        if (dir1 > 0 && dir1 < 90) {
+          direction = map(dir1, 0, 90, 10, 45);
+        } else if (dir1 < 0) {
+          direction = map(dir1, -90, 0, 45, 80);
+        }
+        var a = abs(direction);
+        var b = map(a, 0, 90, 3, 6);
+        sideVal = dist(beginX, beginY, endX, endY) / b;
+        //print(dir1 + ',' + direction);
+        startX = beginX;
+        startY = beginY;
+        setSelect();
 
-    if (dir1 > 0 && dir1 < 90) {
-      direction = map(dir1, 0, 90, 10, 45);
-    } else if (dir1 < 0) {
-      direction = map(dir1, -90, 0, 45, 80);
+        particle = [];
+        particlenew = [];
+        j_count = 0;
+        var s = new sqFractal(startX, startY, sideVal, hueStart, direction);
+        s.init();
+        squares.push(s);
+      }
     }
-    print(dir1 + ',' + direction);
-    startX = beginX;
-    startY = beginY;
 
   } else {
-    if ((mouseX < paletteX + 50 && mouseY > paletteY - 50) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+    if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
       setSelect();
     }
   }
@@ -161,9 +211,7 @@ function mouseReleased() {
 
 function mousePressed() {
   if (selectPattern == 'circles') {
-    particle = [];
-    particlenew = [];
-    j_count = 0;
+
     beginX = mouseX;
     beginY = mouseY;
   }
@@ -172,22 +220,77 @@ function mousePressed() {
 }
 
 function keyPressed() {
-  if (keyCode == LEFT_ARROW) {
-    //print('yo');
-    background(overallBG);
-    pg.pop();
-    fractals.pop();
-    for (var i = 0; i < pg.length; i++) {
 
-      //for (var a = 0; a < xsplit.value(); a++) {
-      //for (var b = 0; b < ysplit.value(); b++) {
-      image(pg[i], a * cWidth, b * cHeight, cWidth, cHeight);
-      //}
-      //}
-
-    }
-  }
   if (keyCode == 32) {
     pauseFn();
+  }
+}
+
+
+
+/*******************************************
+    TOUCH FUNCTIONS
+ *******************************************/
+
+function touchStarted() {
+  if (selectPattern == 'circles') {
+
+    beginX = touchX;
+    beginY = touchY;
+  }
+}
+
+function touchEnded() {
+  hueStart = selectHueColor(paletteX, paletteY, hueStart);
+  if (selectPattern == 'circles') {
+
+    //if ((mouseX < paletteX + 75 && mouseY > paletteY - 75) || (mouseY > 0.8 * windowHeight && mouseX > windowWidth * 0.8)) {} else {
+    endX = touchX;
+    endY = touchY;
+
+    var dir1 = atan((endY - beginY) / (endX - beginX));
+    if (true) { //endY >= beginY) {
+      if (dir1 > 0 && dir1 < 90) {
+        direction = map(dir1, 0, 90, 10, 45);
+      } else if (dir1 < 0) {
+        direction = map(dir1, -90, 0, 45, 80);
+      }
+      var a = abs(direction);
+      var b = map(a, 0, 90, 3, 6);
+      sideVal = dist(beginX, beginY, endX, endY) / b;
+      //print(dir1 + ',' + direction);
+      startX = beginX;
+      startY = beginY;
+      setSelect();
+
+      particle = [];
+      particlenew = [];
+      j_count = 0;
+      var s = new sqFractal(startX, startY, sideVal, hueStart, direction);
+      s.init();
+      squares.push(s);
+      print(squares.length);
+    }
+  }
+
+}
+
+function touchMoved() {
+
+  hueStart = selectHueColor(paletteX, paletteY, hueStart);
+  if (selectPattern == 'fractals') {
+    strokeWeight(1);
+    for (var i = 0; i < touches.length; i++) {
+      
+      var tX = touches[i].x;
+      var tY = touches[i].y;
+      if ((tX < paletteX + 50 && tY > paletteY - 50) || (tY > 0.8 * windowHeight && tX > windowWidth * 0.8)) {} else {
+        if (dist(tX, tY, ptouchx[i], ptouchy[i]) > 60) {
+          ptouchx[i] = tX;
+          ptouchy[i] = tY;
+          fractalArt(tX, tY);
+        }
+      }
+    }
   }
 }
