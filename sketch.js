@@ -233,6 +233,7 @@ function keyPressed() {
  *******************************************/
 
 function touchStarted() {
+  print('hello2');
   if (selectPattern == 'circles') {
 
     beginX = touchX;
@@ -241,6 +242,7 @@ function touchStarted() {
 }
 
 function touchEnded() {
+  print('hello1');
   hueStart = selectHueColor(paletteX, paletteY, hueStart);
   if (selectPattern == 'circles') {
 
@@ -275,10 +277,12 @@ function touchEnded() {
 
 }
 
-function touchMoved() {
-
+function touchMoved(event) {
+  event.preventDefault();
+print('in here');
   hueStart = selectHueColor(paletteX, paletteY, hueStart);
   if (selectPattern == 'fractals') {
+    print(touches.length);
     strokeWeight(1);
     for (var i = 0; i < touches.length; i++) {
       
