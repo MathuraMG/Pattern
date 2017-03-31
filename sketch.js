@@ -42,8 +42,6 @@ var hueStart = 0;
 var freq = [261, 329, 392, 440, 523];
 var vol = [];
 var osc = [];
-var notes = [];
-var totNotes = 3;
 var imgData;
 var ctx;
 var posX = 0;
@@ -87,7 +85,6 @@ var handScaleFactor = 0.5;
 
 
 function preload() {
-  notes = [loadSound('assets/bass.mp3'), loadSound('assets/drums.mp3'), loadSound('assets/piano.mp3')];
   palletteImage = loadImage('assets/pallette1.png');
   brHand = loadImage('assets/brHand.png');
   trHand = loadImage('assets/trHand.png');
@@ -100,7 +97,6 @@ function setup() {
   background(overallBG);
   setupFnButtons();
   setupP();
-  initMusic();
   canvasGraphics();
   selectButtonImg();
   drawHomePage();
@@ -285,7 +281,7 @@ print('in here');
     print(touches.length);
     strokeWeight(1);
     for (var i = 0; i < touches.length; i++) {
-      
+
       var tX = touches[i].x;
       var tY = touches[i].y;
       if ((tX < paletteX + 50 && tY > paletteY - 50) || (tY > 0.8 * windowHeight && tX > windowWidth * 0.8)) {} else {

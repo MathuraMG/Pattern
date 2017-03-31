@@ -1,11 +1,11 @@
-//HOME PAGE FUNCTIONS 
+//HOME PAGE FUNCTIONS
 /*
 <!--<body>
   <div id="homePageBack">
     <button id="fractalBtn" class="selectBtn" onClick="javascript:changeSelectPattern('fractals')"><img class="imgFrBtn" src="assets/frBtn.png"></button>
     <button id="circlesBtn" class="selectBtn" onClick="javascript:changeSelectPattern('circles')"><img class="imgFrBtn" src="assets/crBtn.png"></button>
     <button id="brownianBtn" class="selectBtn" onClick="javascript:changeSelectPattern('lines')"><img class="imgFrBtn" src="assets/brBtn.png"></button>
-  </div>--> 
+  </div>-->
   */
 
 function drawHomePage() {
@@ -33,7 +33,7 @@ function drawHomePage() {
   button2.class('selectBtn');
   button2.mouseClicked(function() {
     changeSelectPattern('circles');
-    
+
   });
   button2.position(windowWidth / 2 - imgSize * 0.5, windowHeight / 2 - imgSize * 0.5);
   button2.style('background-color', 'transparent');
@@ -182,7 +182,7 @@ function drawImageGestures(){
   } else if (selectPattern == 'lines') {
     image(brHand,10,10);
   } else {
-    
+
   }
   pop();
 }
@@ -286,14 +286,6 @@ function textInstructions() {
   a = document.getElementById('instructions');
   a.innerHTML = inst;
 
-}
-
-function initMusic() {
-  for (var i = 0; i < totNotes; i++) {
-    vol[i] = 0;
-    notes[i].loop();
-    notes[i].setVolume(0);
-  }
 }
 
 function canvasGraphics() {
